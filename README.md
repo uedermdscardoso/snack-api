@@ -1,2 +1,0 @@
-# startup-snack
-Prova Técnica
