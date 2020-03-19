@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,10 +35,12 @@ public class Person implements Serializable {
 	@Column(length=12,nullable=false)
 	private String username;	
 	
+	@JsonIgnore	
 	@Column(length=12, nullable=false)
 	private String password;	
 	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable=false)
 	private PersonProfile profile;
 	
 	@OneToMany(mappedBy="person")

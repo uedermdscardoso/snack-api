@@ -6,4 +6,6 @@ import dev.uedercardoso.snack.domain.Person;
 
 public interface PersonRepository extends JpaRepository<Person, Long>{
 
+	Person findByUsername(String username);
+
 }

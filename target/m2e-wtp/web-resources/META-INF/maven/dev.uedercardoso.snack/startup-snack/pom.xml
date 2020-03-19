@@ -7,6 +7,15 @@
   <name>Avaliação</name>
   <description>Prova técnica</description>
   
+  <developers>
+    <developer>
+      <name>Ueder Cardoso</name>
+      <email>ueder.cardosoinfo@gmail.com</email>
+      <organization>Ueder Cardoso</organization>
+      <organizationUrl>https://www.uedercardoso.dev</organizationUrl>
+    </developer>
+  </developers>
+  
   <parent>
 	 <groupId>org.springframework.boot</groupId>
 	 <artifactId>spring-boot-starter-parent</artifactId>
@@ -41,6 +50,18 @@
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-data-jpa</artifactId>
+	</dependency>
+  	
+  	<!-- Spring Security -->
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-security</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.security.oauth.boot</groupId>
+		<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+		<version>2.0.1.RELEASE</version>
+		
 	</dependency>
   	
   </dependencies>
