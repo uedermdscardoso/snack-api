@@ -26,7 +26,6 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 	
-    //Deixar para API
     @Bean
     public HttpFirewall defaultHttpFirewall() {
     	return new DefaultHttpFirewall();
@@ -36,7 +35,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity  web) throws Exception {
     	web
     		.httpFirewall(defaultHttpFirewall())
-    		.ignoring().antMatchers("/persons");
+    		.ignoring().antMatchers("/persons/**","/ingredients/**","/snacks/**","/orders/**");
     }
     
     @Autowired
@@ -44,9 +43,4 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
     
-    /*@Bean
-    public PasswordEncoder passwordEncoder() {
-    	return NoOpPasswordEncoder.getInstance();
-    }*/
-	
 }

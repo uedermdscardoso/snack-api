@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dev.uedercardoso.snack.domain.Ingredient;
 import dev.uedercardoso.snack.domain.Snack;
 import dev.uedercardoso.snack.exceptions.EmptyListException;
 import dev.uedercardoso.snack.web.repositories.SnackRepository;
@@ -24,8 +23,12 @@ public class SnackService {
 		return list;
 	}
 	
-	public void save(Snack snack) {
-		this.snackRepository.save(snack);
+	public void save(List<Snack> snacks) {
+		this.snackRepository.saveAll(snacks);
+	}
+	
+	public void saveCustom(Snack snack) {
+		this.snackRepository.saveAndFlush(snack);
 	}
 	
 	public void save(Long id, Snack snack) {

@@ -14,8 +14,8 @@ public class IngredientService {
 	@Autowired
 	private IngredientRepository ingredientRepository;
 	
-	public void save(Ingredient ingredient) {
-		this.ingredientRepository.saveAndFlush(ingredient);
+	public void save(List<Ingredient> ingredients) {
+		this.ingredientRepository.saveAll(ingredients);
 	}
 	
 	public void save(Long id, Ingredient ingredient) {

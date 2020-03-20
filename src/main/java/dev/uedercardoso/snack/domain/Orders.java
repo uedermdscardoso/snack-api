@@ -30,13 +30,14 @@ public class Orders implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id; 
 	
+	@Column(name="creation_date")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date creationDate;
 	
-	@Column(nullable=false)
+	@Column(name="total_price")
 	private Double totalPrice;
 
-	@Column(nullable=false)
+	@Column(name="tital_discount")
 	private Double totalDiscount;
 	
 	@OneToMany(mappedBy="order")

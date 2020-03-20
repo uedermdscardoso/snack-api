@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dev.uedercardoso.snack.domain.Ingredient;
+import dev.uedercardoso.snack.domain.Item;
 import dev.uedercardoso.snack.domain.Orders;
 import dev.uedercardoso.snack.domain.Person;
 import dev.uedercardoso.snack.exceptions.EmptyListException;
@@ -21,6 +23,25 @@ public class OrdersService {
 	private PersonRepository personRepository;
 
 	public void save(Orders order) {
+		
+		
+		if(order.getItems() != null || order.getItems().size() > 0) {
+			
+			Double priceItem = 0d;
+			for(Item item : order.getItems()) {
+				for(Ingredient ingredient : item.getSnack().getIngredients()	) {
+					priceItem += ingredient.getPrice();
+					
+				}
+			}
+			
+//			for(Item item : order.getItems()) {
+//				if(item.getIsCustom()) {
+//					this.saveCustomItems(order);
+//				}	
+//			}
+		}
+		
 		this.ordersRepository.saveAndFlush(order);
 	}
 	

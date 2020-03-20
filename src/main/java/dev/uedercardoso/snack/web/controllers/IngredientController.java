@@ -38,10 +38,10 @@ public class IngredientController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> save(@Valid @RequestBody Ingredient ingredient) {
+	public ResponseEntity<Void> save(@Valid @RequestBody List<Ingredient> ingredients) {
 		try {
 			
-			this.ingredientService.save(ingredient);
+			this.ingredientService.save(ingredients);
 			
 			return ResponseEntity.ok().build();
 			

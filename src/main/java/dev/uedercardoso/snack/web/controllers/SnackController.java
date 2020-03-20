@@ -41,10 +41,10 @@ public class SnackController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> save(@Valid @RequestBody Snack snack){
+	public ResponseEntity<Void> save(@Valid @RequestBody List<Snack> snacks){
 		try {
 			
-			this.snackService.save(snack);
+			this.snackService.save(snacks);
 			
 			return ResponseEntity.ok().build();
 			
