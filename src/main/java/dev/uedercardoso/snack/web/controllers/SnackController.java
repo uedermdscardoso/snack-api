@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.uedercardoso.snack.domain.Snack;
+import dev.uedercardoso.snack.domain.model.snack.Snack;
+import dev.uedercardoso.snack.domain.services.SnackService;
 import dev.uedercardoso.snack.exceptions.EmptyListException;
-import dev.uedercardoso.snack.web.services.SnackService;
 
 @RestController
 @RequestMapping("/snacks")
@@ -49,6 +49,7 @@ public class SnackController {
 			return ResponseEntity.ok().build();
 			
 		} catch(Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.badRequest().build();
 		}
 	}

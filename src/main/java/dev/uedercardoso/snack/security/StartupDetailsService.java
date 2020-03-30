@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import dev.uedercardoso.snack.domain.Person;
-import dev.uedercardoso.snack.web.repositories.PersonRepository;
+import dev.uedercardoso.snack.domain.model.person.Person;
+import dev.uedercardoso.snack.domain.repositories.PersonRepository;
 
 @Service
 public class StartupDetailsService implements UserDetailsService {

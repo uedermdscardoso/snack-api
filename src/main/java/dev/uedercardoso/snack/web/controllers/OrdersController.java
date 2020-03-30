@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.uedercardoso.snack.domain.Item;
-import dev.uedercardoso.snack.domain.Orders;
-import dev.uedercardoso.snack.web.services.OrdersService;
+import dev.uedercardoso.snack.domain.model.order.Orders;
+import dev.uedercardoso.snack.domain.model.order.OrdersDTO;
+import dev.uedercardoso.snack.domain.services.OrdersService;
 
 @RestController
 @RequestMapping("/orders")
@@ -26,12 +26,12 @@ public class OrdersController {
 	private OrdersService ordersService;
 	
 	@GetMapping
-	public ResponseEntity<List<Orders>> findAll(){
+	public ResponseEntity<List<OrdersDTO>> findAll(){
 		try {
 			
-			List<Orders> persons = this.ordersService.getAllOrders();
+			List<OrdersDTO> ordersDTO = this.ordersService.getAllOrders();
 			
-			return ResponseEntity.ok(persons);
+			return ResponseEntity.ok(ordersDTO);
 			
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().build();
@@ -39,12 +39,25 @@ public class OrdersController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Orders> findById(@PathVariable Long id){
+	public ResponseEntity<OrdersDTO> findById(@PathVariable Long id){
 		try {
 			
-			Orders person = this.ordersService.getOrders(id);
+			OrdersDTO orderDTO = this.ordersService.getOrdersById(id);
 			
-			return ResponseEntity.ok(person);
+			return ResponseEntity.ok(orderDTO);
+			
+		} catch(Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
+	}
+	
+	@GetMapping("/person/{id}")
+	public ResponseEntity<List<OrdersDTO>> findByPersonId(@PathVariable Long id){
+		try {
+			
+			List<OrdersDTO> ordersDTO = this.ordersService.getOrdersByPersonId(id);
+			
+			return ResponseEntity.ok(ordersDTO);
 			
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().build();
@@ -53,13 +66,16 @@ public class OrdersController {
 	
 	@PostMapping
 	public ResponseEntity<Void> save(@Valid @RequestBody Orders order){
+		
 		try {
-			
+
+			this.ordersService.checkItems(order);
 			this.ordersService.save(order);
 			
 			return ResponseEntity.ok().build();
 			
 		} catch(Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.badRequest().build();
 		}
 	}

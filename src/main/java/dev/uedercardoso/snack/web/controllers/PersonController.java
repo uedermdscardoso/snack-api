@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.uedercardoso.snack.domain.Person;
-import dev.uedercardoso.snack.web.services.PersonService;
+import dev.uedercardoso.snack.domain.model.person.Person;
+import dev.uedercardoso.snack.domain.services.PersonService;
 
 @RestController
 @RequestMapping("/persons")
