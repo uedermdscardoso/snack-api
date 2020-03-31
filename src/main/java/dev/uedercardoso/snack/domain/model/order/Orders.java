@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,6 +47,10 @@ public class Orders implements Serializable {
 	@Column(name="total_discount",columnDefinition="double default 0")
 	private Double totalDiscount;
 	
+	@Column(nullable=false)
+	@Enumerated(EnumType.STRING)
+	private TypeStatus status;
+	
 	@NotNull
 	@OneToMany(mappedBy="order", cascade=CascadeType.ALL)
 	private List<Item> items;
@@ -60,11 +66,22 @@ public class Orders implements Serializable {
 	
 	public Orders(Orders order, Double totalPrice, Double totalDiscount, Person person) {
 		this.creationDate = Calendar.getInstance().getTime();
+		this.status = TypeStatus.PREPARING; //Preparando o lanche depois que foi pedido
 		this.totalPrice = totalPrice;
 		this.totalDiscount = totalDiscount;
 		this.person = person;
 		
 		this.items = order.getItems();
+	}
+	
+	public Orders(Orders order, TypeStatus status) {
+		this.id = order.getId();
+		this.creationDate = order.getCreationDate();
+		this.totalPrice = order.getTotalPrice();
+		this.totalDiscount = order.getTotalDiscount();
+		this.status = status;
+		this.items = order.getItems();
+		this.person = order.getPerson();
 	}
 	
 }

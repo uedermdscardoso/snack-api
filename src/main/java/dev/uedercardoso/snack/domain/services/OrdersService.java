@@ -13,6 +13,7 @@ import dev.uedercardoso.snack.domain.model.order.ItemDTO;
 import dev.uedercardoso.snack.domain.model.order.ItemPk;
 import dev.uedercardoso.snack.domain.model.order.Orders;
 import dev.uedercardoso.snack.domain.model.order.OrdersDTO;
+import dev.uedercardoso.snack.domain.model.order.TypeStatus;
 import dev.uedercardoso.snack.domain.model.person.Person;
 import dev.uedercardoso.snack.domain.model.person.PersonDTO;
 import dev.uedercardoso.snack.domain.model.snack.Ingredient;
@@ -28,6 +29,8 @@ import dev.uedercardoso.snack.domain.repositories.SnackIngredientRepository;
 import dev.uedercardoso.snack.domain.repositories.SnackRepository;
 import dev.uedercardoso.snack.exceptions.EmptyListException;
 import dev.uedercardoso.snack.exceptions.EmptyNameException;
+import dev.uedercardoso.snack.exceptions.OrderCanceledException;
+import dev.uedercardoso.snack.exceptions.OrderIsReadyException;
 import dev.uedercardoso.snack.exceptions.OrderNotFoundException;
 import dev.uedercardoso.snack.exceptions.OrdersServiceException;
 
@@ -161,12 +164,37 @@ public class OrdersService {
 		return ordersDTO;
 	}
 	
-	public void delete(Long id) {
-		
+	public void cancelOrder(Long id) {
 		if(!this.ordersRepository.existsById(id))
 			throw new OrderNotFoundException("Pedido "+id+" não encontrado");
 		
-		this.ordersRepository.deleteById(id);
+		if(this.ordersRepository.existsByIdAndStatus(id, TypeStatus.READY))
+			throw new OrderIsReadyException("O pedido "+id+" não pode ser cancelado porque já está pronto");
+		
+		if(this.ordersRepository.existsByIdAndStatus(id, TypeStatus.CANCELED))
+			throw new OrderCanceledException("O pedido "+id+" já foi cancelado");
+
+		this.changeStatus(id, TypeStatus.CANCELED);
+	}
+	
+	public void changeStatusToReady(Long id) {
+		if(!this.ordersRepository.existsById(id))
+			throw new OrderNotFoundException("Pedido "+id+" não encontrado");
+		
+		if(this.ordersRepository.existsByIdAndStatus(id, TypeStatus.CANCELED))
+			throw new OrderCanceledException("O pedido "+id+" já foi cancelado");
+		
+		if(this.ordersRepository.existsByIdAndStatus(id, TypeStatus.READY))
+			throw new OrderIsReadyException("O pedido "+id+" já está pronto");
+		
+		this.changeStatus(id, TypeStatus.READY);
+	}
+	
+	private void changeStatus(Long id, TypeStatus status) {
+		Orders order = this.ordersRepository.findById(id).get();
+		order = new Orders(order, status);
+		
+		this.ordersRepository.saveAndFlush(order);
 	}
 	
 	private Double calcDiscount(Snack snack){
@@ -219,12 +247,8 @@ public class OrdersService {
 	private Double calcSnackPrice(Snack snack) {
 		Double price = 0d;
 		for(SnackIngredient item : snack.getItems()) {
-			System.out.println("piece: "+item.getPiece()+", price: R$ "+item.getIngredient().getPrice());
 			price += item.getPiece() * item.getIngredient().getPrice();
 		}
-		
-		System.out.println("price: "+price);
-		
 		return price;
 	}
 	

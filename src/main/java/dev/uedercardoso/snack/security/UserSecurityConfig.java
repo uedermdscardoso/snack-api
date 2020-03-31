@@ -1,46 +1,114 @@
 package dev.uedercardoso.snack.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
-import org.springframework.security.web.firewall.DefaultHttpFirewall;
-import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableWebSecurity
-@EnableAuthorizationServer
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 	
+	//https://medium.com/better-programming/secure-a-spring-boot-rest-api-with-json-web-token-reference-to-angular-integration-e57a25806c50
+	
+	@Value("${security.signing-key}")
+	private String signingKey;
+
+	@Value("${security.encoding-strength}")
+	private Integer encodingStrength;
+
+    @Value("${security.security-realm}")
+    private String securityRealm;
+
+    
 	@Autowired
 	private StartupDetailsService userDetailsService;
-	
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-	
+    
     @Bean
-    public HttpFirewall defaultHttpFirewall() {
-    	return new DefaultHttpFirewall();
+    @Override
+    protected AuthenticationManager authenticationManager() throws Exception {
+       return super.authenticationManager();
+    }
+    
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+       auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
-	public void configure(WebSecurity  web) throws Exception {
-    	web
-    		.httpFirewall(defaultHttpFirewall())
-    		.ignoring().antMatchers("/persons/**","/ingredients/**","/snacks/**","/orders/**");
-    }
-    
-    @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-    
+    protected void configure(HttpSecurity http) throws Exception {
+       http
+           .sessionManagement()
+           .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+           .and()
+           .httpBasic()
+           .realmName(securityRealm)
+           .and()
+           	  .csrf().disable();
+   }
+
+   @Bean
+   public JwtAccessTokenConverter accessTokenConverter() {
+      JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+      converter.setSigningKey(signingKey);
+      return converter;
+   }
+
+   @Bean
+   public TokenStore tokenStore() {
+      return new JwtTokenStore(accessTokenConverter());
+   }
+
+   @Bean
+   @Primary 
+   public DefaultTokenServices tokenServices() {
+      DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+      defaultTokenServices.setTokenStore(tokenStore());
+      defaultTokenServices.setSupportRefreshToken(true);
+      return defaultTokenServices;
+   }
+
+
+//    
+//    @Autowired
+//    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//    }
+//
+//    @Override
+//	public void configure(HttpSecurity http) throws Exception {
+//        http
+//	        .httpBasic()
+//	        .and()
+//	        .authorizeRequests()
+//	        .antMatchers(HttpMethod.POST, "/oauth/token").permitAll()
+//	        .antMatchers(HttpMethod.GET, "/orders/**").hasRole("ADMIN")
+//	        .antMatchers(HttpMethod.POST, "/orders/**").hasRole("ADMIN")
+//	        .antMatchers(HttpMethod.DELETE, "/orders/**").hasRole("ADMIN")
+//	        .and()
+//	        .csrf().disable()
+//	        .formLogin().disable();
+//    }
+//    
 }

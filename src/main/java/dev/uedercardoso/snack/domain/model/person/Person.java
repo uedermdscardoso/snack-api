@@ -12,7 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -37,8 +41,7 @@ public class Person implements Serializable {
 	@Column(length=12,nullable=false)
 	private String username;	
 	
-	@JsonIgnore	
-	@Column(length=12, nullable=false)
+	@Column(nullable=false)
 	private String password;	
 	
 	@Enumerated(EnumType.STRING)

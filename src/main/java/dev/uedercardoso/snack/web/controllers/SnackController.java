@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.uedercardoso.snack.domain.model.snack.Snack;
 import dev.uedercardoso.snack.domain.services.SnackService;
 import dev.uedercardoso.snack.exceptions.EmptyListException;
+import dev.uedercardoso.snack.exceptions.SnackNotFoundException;
 
 @RestController
 @RequestMapping("/snacks")
@@ -27,6 +29,7 @@ public class SnackController {
 	private SnackService snackService;
 	
 	@GetMapping
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<List<Snack>> findAll(){
 		try {
 			List<Snack> snacks = this.snackService.getAllSnacks();
@@ -41,6 +44,7 @@ public class SnackController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<Void> save(@Valid @RequestBody List<Snack> snacks){
 		try {
 			
@@ -55,6 +59,7 @@ public class SnackController {
 	}
 
 	@PutMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<Void> saveById(@RequestBody Long id, @Valid @RequestBody Snack snack){
 		try {
 			
@@ -68,6 +73,7 @@ public class SnackController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<Void> delete(@RequestParam Long id){
 		try {
 			
@@ -75,6 +81,8 @@ public class SnackController {
 			
 			return ResponseEntity.ok().build();
 			
+		} catch(SnackNotFoundException e) {
+			return ResponseEntity.notFound().build();
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().build();
 		}

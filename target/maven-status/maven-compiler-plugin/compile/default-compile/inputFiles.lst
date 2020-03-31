@@ -1,14 +1,18 @@
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\order\Orders.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\repositories\PersonRepository.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\order\ItemDTO.java
+C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\exceptions\OrderNotFoundException.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\services\IngredientService.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\snack\SnackIngredientDTO.java
+C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\config\SwaggerConfig.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\repositories\SnackRepository.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\repositories\OrdersRepository.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\web\controllers\SnackController.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\exceptions\OrdersServiceException.java
+C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\security\ResourceServerConfig.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\snack\Snack.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\snack\Ingredient.java
+C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\exceptions\SnackNotFoundException.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\snack\TypePromoton.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\exceptions\EmptyNameException.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\order\OrdersDTO.java
@@ -18,6 +22,7 @@ C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercard
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\security\StartupDetailsService.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\repositories\SnackIngredientRepository.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\web\controllers\OrdersController.java
+C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\security\AuthorizationServerConfig.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\snack\SnackIngredient.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\SnackWebApplication.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\person\Person.java
@@ -25,6 +30,7 @@ C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercard
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\web\controllers\IngredientController.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\web\controllers\PersonController.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\order\Item.java
+C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\exceptions\PersonNotFoundException.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\repositories\IngredientRepository.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\snack\SnackIngredientPk.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\person\PersonProfile.java
@@ -33,3 +39,4 @@ C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercard
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\repositories\ItemRepository.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\snack\SnackDTO.java
 C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\domain\model\order\ItemPk.java
+C:\Users\User\Documents\IDE STS Spring\startup-snack\src\main\java\dev\uedercardoso\snack\exceptions\IngredientNotFoundException.java

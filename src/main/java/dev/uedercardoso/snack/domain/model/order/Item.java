@@ -29,7 +29,7 @@ public class Item implements Serializable {
 	@JoinColumn(name="order_id",insertable=false, updatable=false)
 	private Orders order;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE}, fetch=FetchType.LAZY)
 	@JoinColumn(name="snack_id",insertable=false, updatable=false)
 	private Snack snack;
 	

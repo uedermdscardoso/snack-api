@@ -6,10 +6,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.uedercardoso.snack.domain.model.order.Orders;
 import dev.uedercardoso.snack.domain.model.order.OrdersDTO;
 import dev.uedercardoso.snack.domain.services.OrdersService;
+import dev.uedercardoso.snack.exceptions.OrderCanceledException;
+import dev.uedercardoso.snack.exceptions.OrderIsReadyException;
+import dev.uedercardoso.snack.exceptions.OrderNotFoundException;
 
 @RestController
 @RequestMapping("/orders")
@@ -26,6 +30,7 @@ public class OrdersController {
 	private OrdersService ordersService;
 	
 	@GetMapping
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<List<OrdersDTO>> findAll(){
 		try {
 			
@@ -39,6 +44,7 @@ public class OrdersController {
 	}
 	
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CUSTOMER')")
 	public ResponseEntity<OrdersDTO> findById(@PathVariable Long id){
 		try {
 			
@@ -52,6 +58,7 @@ public class OrdersController {
 	}
 	
 	@GetMapping("/person/{id}")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CUSTOMER')")
 	public ResponseEntity<List<OrdersDTO>> findByPersonId(@PathVariable Long id){
 		try {
 			
@@ -65,6 +72,7 @@ public class OrdersController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CUSTOMER')")
 	public ResponseEntity<Void> save(@Valid @RequestBody Orders order){
 		
 		try {
@@ -80,17 +88,39 @@ public class OrdersController {
 		}
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	@PutMapping("/{id}/cancel")
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CUSTOMER')")
+	public ResponseEntity<Void> cancelOrder(@PathVariable Long id){
 		try {
 			
-			this.ordersService.delete(id);
+			this.ordersService.cancelOrder(id);
 			
 			return ResponseEntity.ok().build();
 			
+		} catch(OrderIsReadyException | OrderCanceledException e) {
+			return ResponseEntity.noContent().build();
+		} catch(OrderNotFoundException e) {
+			return ResponseEntity.notFound().build();
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().build();
 		}
 	}
 	
+	@PutMapping("{id}/ready")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public ResponseEntity<Void> changeStatusToReady(@PathVariable Long id){
+		try {
+			
+			this.ordersService.changeStatusToReady(id);;
+			
+			return ResponseEntity.ok().build();
+			
+		} catch(OrderIsReadyException | OrderCanceledException e) {
+			return ResponseEntity.noContent().build();
+		} catch(OrderNotFoundException e) {
+			return ResponseEntity.notFound().build();
+		} catch(Exception e) {
+			return ResponseEntity.badRequest().build();
+		}
+	}
 }
