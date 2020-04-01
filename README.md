@@ -4,6 +4,10 @@
 
 <h3>Ingredientes</h3>
 
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients      <b>Method: GET</b>
+<br /> <b>Descrição:</b> Lista todos os ingredientes.
+<br /> <b>Permissão: </b> Somente o administrador
+
 <h3>Pedidos</h3>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders      <b>Method: GET</b>
