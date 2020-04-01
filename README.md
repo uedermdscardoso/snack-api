@@ -5,7 +5,7 @@
 
 ------------------------------------------------
 
-URL: http://{server}:{port}/orders  method: POST
+URL: http://<b>{server}</b>:<b>{port}</b>/orders  method: POST
 
 Descrição: JSON para criar um pedido com item personalizados e não personalizados conforme o atributo isCustom. Precisa seguir essa estrutura. 
 
@@ -53,7 +53,7 @@ Descrição: JSON para criar um pedido com item personalizados e não personaliz
 
 ------------------------------------------------
 
-URL: http://{server}:{port}/ingredients   method: POST
+URL: http://<b>{server}</b>:<b>{port}</b>/ingredients   method: POST
 Descrição: Salvar novo ingrediente
 
 ```
