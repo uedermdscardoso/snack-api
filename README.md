@@ -61,6 +61,10 @@
   }
 ```
 
+<h3>Cancelar pedido</h3>
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>/cancel   <b>method: PUT</b>
+<b>Descrição: </b> Muda o status do pedido para cancelado. O administrador pode cancelar qualquer pedido em aberto (PREPARING) e o usuário comum apenas pode cancelar os seus pedidos. 
+
 <hr />
 <h3>Salvar ingredientes</h3>
   
