@@ -4,7 +4,7 @@
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders
 <br /> <b>Descrição:</b> Lista de todos os pedidos e somente o administrador tem acesso. 
 
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>id</b>
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>
 <br /> <b>Descrição:</b> O administrador pode acessar qualquer pedido por meu de seu código e o usuário comum só pode acessar os seus pedidos. 
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/my
