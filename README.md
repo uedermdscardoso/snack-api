@@ -11,11 +11,12 @@
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/my  <b>method: GET</b>
 <br /> <b>Descrição:</b> Lista os pedidos do usuário autenticado. O administrador e o usuário comum têm acessos. 
 
-<h3>Salvar pedidos<h3/>
+<hr />
+<h3>Salvar pedidos</h3>
   
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders  <b>method: POST</b>
 
-Descrição: JSON para criar um pedido com item personalizados e não personalizados conforme o atributo isCustom. Precisa seguir essa estrutura. 
+<b>Descrição:</b> JSON para criar um pedido com item personalizados e não personalizados conforme o atributo isCustom. Precisa seguir essa estrutura. 
 
 ```
   {
@@ -59,7 +60,8 @@ Descrição: JSON para criar um pedido com item personalizados e não personaliz
   }
 ```
 
-<h3>Salvar ingredientes<h3/>
+<hr />
+<h3>Salvar ingredientes</h3>
   
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients   <b>method: POST</b>
 Descrição: Salvar novo ingrediente
