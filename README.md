@@ -24,6 +24,51 @@
 
 <hr />
 <h2>Cadastros</h2>
+<h3>Salvar ingredientes</h3>
+  
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients      <b>Method: POST</b>
+<br />
+<b>Descrição:</b> Salvar novo ingrediente
+<br /> <b>Permissão: </b> Somente o administrador pode cadastrar ingredientes.
+
+```
+[
+	{
+		"name":"Alface",
+		"price": 0.4
+	},
+	{
+		"name":"Bacon",
+		"price": 2
+	},
+	{
+		"name":"Hambúrguer",
+		"price": 3
+	},
+	{
+		"name":"Ovo",
+		"price": 0.8
+	},
+	{
+		"name":"Queijo",
+		"price": 1.5
+	}
+]
+```
+
+<b>Descrição:</b> Atualizar o registro do ingrediente do código 6 (Passando o id)
+
+```
+  [
+    {
+      "id": 6,
+      "name":"teste",
+      "price": 3
+    }
+  ]
+```
+
+<hr />
 <h3>Salvar pedidos</h3>
   
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders      <b>Method: POST</b>
@@ -86,47 +131,4 @@
 <br /> <b>Permissão: </b> Somente o administrador pode finalizar os pedidos.
 
 <hr />
-<h3>Salvar ingredientes</h3>
-  
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients      <b>Method: POST</b>
-<br />
-<b>Descrição:</b> Salvar novo ingrediente
-<br /> <b>Permissão: </b> Somente o administrador pode cadastrar ingredientes.
-
-```
-[
-	{
-		"name":"Alface",
-		"price": 0.4
-	},
-	{
-		"name":"Bacon",
-		"price": 2
-	},
-	{
-		"name":"Hambúrguer",
-		"price": 3
-	},
-	{
-		"name":"Ovo",
-		"price": 0.8
-	},
-	{
-		"name":"Queijo",
-		"price": 1.5
-	}
-]
-```
-
-<b>Descrição:</b> Atualizar o registro do ingrediente do código 6 (Passando o id)
-
-```
-  [
-    {
-      "id": 6,
-      "name":"teste",
-      "price": 3
-    }
-  ]
-```
 
