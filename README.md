@@ -1,5 +1,6 @@
 # DOCUMENTAÇÃO
 
+<h1>Para Consultas</h1>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders
 <br /> <b>Descrição:</b> Lista de todos os pedidos e somente o administrador tem acesso. 
