@@ -3,13 +3,16 @@
 <h2>Consultas</h2>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders      <b>Method: GET</b>
-<br /> <b>Descrição:</b> Lista de todos os pedidos e somente o administrador tem acesso. 
+<br /> <b>Descrição:</b> Lista de todos os pedidos.
+<br /> <b>Permissão: </b> Somente o administrador tem acesso.
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>      <b>Method: GET</b>
-<br /> <b>Descrição:</b> O administrador pode acessar qualquer pedido por meio de seu código e o usuário comum só pode acessar os seus pedidos individualmente. 
+<br /> <b>Descrição:</b> Lista um determinado pedido através do código. 
+<br /> <b>Permissão: </b> O administrador pode acessar qualquer pedido através do código e o usuário comum só pode acessar os seus pedidos individualmente. 
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/my      <b>Method: GET</b>
-<br /> <b>Descrição:</b> Lista os pedidos do usuário autenticado. O administrador e o usuário comum têm acessos. 
+<br /> <b>Descrição:</b> Lista os pedidos do usuário autenticado. 
+<br /> <b>Permissão: </b> O administrador e o usuário comum têm acessos. 
 
 <hr />
 <h2>Cadastros</h2>
@@ -17,7 +20,8 @@
   
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders      <b>Method: POST</b>
 <br />
-<b>Descrição:</b> JSON para criar um pedido com item personalizados e não personalizados conforme o atributo isCustom. Precisa seguir essa estrutura. 
+<b>Descrição:</b> JSON para criar um pedido com item personalizados e não personalizados conforme o atributo isCustom. Precisa seguir a estrutura abaixo. 
+<br /> <b>Permissão: </b> O administrador e o usuário comum podem cadastrar pedidos. 
 
 ```
   {
@@ -64,12 +68,14 @@
 <h3>Cancelar pedido</h3>
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>/cancel      <b>Method: PUT</b>
 <br />
-<b>Descrição: </b> Muda o status do pedido para cancelado (CANCELED). O administrador pode cancelar qualquer pedido em aberto (PREPARING) e o usuário comum apenas pode cancelar os seus pedidos. 
+<b>Descrição: </b> Muda o status do pedido para cancelado (CANCELED). 
+<br /> <b>Permissão: </b> O administrador pode cancelar qualquer pedido em aberto (PREPARING) e o usuário comum apenas pode cancelar os seus pedidos. 
 
 <h3>Finalizar pedidos</h3>
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>/ready      <b>Method: PUT</b>
 <br />
-<b>Descrição: </b> Muda o status do pedido para pronto (READY). Somente o administrador pode finalizar os pedidos.
+<b>Descrição: </b> Muda o status do pedido para pronto (READY). 
+<br /> <b>Permissão: </b> Somente o administrador pode finalizar os pedidos.
 
 <hr />
 <h3>Salvar ingredientes</h3>
@@ -77,6 +83,7 @@
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients      <b>Method: POST</b>
 <br />
 <b>Descrição:</b> Salvar novo ingrediente
+<br /> <b>Permissão: </b> Somente o administrador pode cadastrar ingredientes.
 
 ```
   [
