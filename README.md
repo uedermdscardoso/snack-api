@@ -2,20 +2,20 @@
 
 <h2>Consultas</h2>
 
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders  <b>method: GET</b>
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders      <b>Method: GET</b>
 <br /> <b>Descrição:</b> Lista de todos os pedidos e somente o administrador tem acesso. 
 
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>  <b>method: GET</b>
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>      <b>Method: GET</b>
 <br /> <b>Descrição:</b> O administrador pode acessar qualquer pedido por meio de seu código e o usuário comum só pode acessar os seus pedidos individualmente. 
 
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/my  <b>method: GET</b>
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/my      <b>Method: GET</b>
 <br /> <b>Descrição:</b> Lista os pedidos do usuário autenticado. O administrador e o usuário comum têm acessos. 
 
 <hr />
 <h2>Cadastros</h2>
 <h3>Salvar pedidos</h3>
   
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders  <b>method: POST</b>
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders      <b>Method: POST</b>
 
 <b>Descrição:</b> JSON para criar um pedido com item personalizados e não personalizados conforme o atributo isCustom. Precisa seguir essa estrutura. 
 
@@ -62,14 +62,14 @@
 ```
 
 <h3>Cancelar pedido</h3>
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>/cancel   <b>method: PUT</b>
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>/cancel      <b>Method: PUT</b>
 <b>Descrição: </b> Muda o status do pedido para cancelado. O administrador pode cancelar qualquer pedido em aberto (PREPARING) e o usuário comum apenas pode cancelar os seus pedidos. 
 
 <hr />
 <h3>Salvar ingredientes</h3>
   
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients   <b>method: POST</b>
-Descrição: Salvar novo ingrediente
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients      <b>Method: POST</b>
+<b>Descrição:</b> Salvar novo ingrediente
 
 ```
   [
@@ -80,7 +80,7 @@ Descrição: Salvar novo ingrediente
   ]
 ```
 
-Descrição: Atualizar o registro do ingrediente do código 6 (Passando o id)
+<b>Descrição:</b> Atualizar o registro do ingrediente do código 6 (Passando o id)
 
 ```
   [
