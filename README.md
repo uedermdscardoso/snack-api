@@ -2,13 +2,13 @@
 
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders
-Descrição: Lista de todos os pedidos e somente o administrador tem acesso. 
+<br /> Descrição: Lista de todos os pedidos e somente o administrador tem acesso. 
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>id</b>
-Descrição: O administrador pode acessar qualquer pedido por meu de seu código e o usuário comum só pode acessar os seus pedidos. 
+<br /> Descrição: O administrador pode acessar qualquer pedido por meu de seu código e o usuário comum só pode acessar os seus pedidos. 
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/my
-Descrição: Lista de pedidos do usuário autenticado. O administrador e o usuário comum têm acessos. 
+<br /> Descrição: Lista de pedidos do usuário autenticado. O administrador e o usuário comum têm acessos. 
 
 ------------------------------------------------
 
