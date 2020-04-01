@@ -26,13 +26,13 @@
       "id": 1
     },
     "items":[
-  {
-  "isCustom": false,
-    "quantity": 4,
-    "snack": { 
-      "id": 3
-    }
-  }
+      {
+      "isCustom": false,
+        "quantity": 4,
+        "snack": { 
+          "id": 3
+        }
+      }
       {
         "isCustom": true,
         "quantity": 1,
