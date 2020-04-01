@@ -1,11 +1,18 @@
 # DOCUMENTAÇÃO
 
-```
-```
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders
+Descrição: Lista de todos os pedidos e somente o administrador tem acesso. 
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>id</b>
+Descrição: O administrador pode acessar qualquer pedido por meu de seu código e o usuário comum só pode acessar os seus pedidos. 
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/my
+Descrição: Lista de pedidos do usuário autenticado. O administrador e o usuário comum têm acessos. 
 
 ------------------------------------------------
 
-URL: http://<b>{server}</b>:<b>{port}</b>/orders  method: POST
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders  method: POST
 
 Descrição: JSON para criar um pedido com item personalizados e não personalizados conforme o atributo isCustom. Precisa seguir essa estrutura. 
 
@@ -53,7 +60,7 @@ Descrição: JSON para criar um pedido com item personalizados e não personaliz
 
 ------------------------------------------------
 
-URL: http://<b>{server}</b>:<b>{port}</b>/ingredients   method: POST
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients   method: POST
 Descrição: Salvar novo ingrediente
 
 ```
