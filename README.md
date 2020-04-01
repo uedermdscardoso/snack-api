@@ -11,7 +11,6 @@
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/my  <b>method: GET</b>
 <br /> <b>Descrição:</b> Lista os pedidos do usuário autenticado. O administrador e o usuário comum têm acessos. 
 
-<hr />
 <h3>Salvar pedidos<h3/>
   
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders  <b>method: POST</b>
@@ -60,7 +59,6 @@ Descrição: JSON para criar um pedido com item personalizados e não personaliz
   }
 ```
 
-<hr />
 <h3>Salvar ingredientes<h3/>
   
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients   <b>method: POST</b>
