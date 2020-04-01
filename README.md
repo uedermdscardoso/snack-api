@@ -2,6 +2,10 @@
 
 <h2>Consultas</h2>
 
+<h3>Ingredientes</h3>
+
+<h3>Pedidos</h3>
+
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders      <b>Method: GET</b>
 <br /> <b>Descrição:</b> Lista de todos os pedidos.
 <br /> <b>Permissão: </b> Somente o administrador tem acesso.
@@ -86,12 +90,28 @@
 <br /> <b>Permissão: </b> Somente o administrador pode cadastrar ingredientes.
 
 ```
-  [
-    {
-      "name":"teste",
-      "price": 3
-    }
-  ]
+[
+	{
+		"name":"Alface",
+		"price": 0.4
+	},
+	{
+		"name":"Bacon",
+		"price": 2
+	},
+	{
+		"name":"Hambúrguer",
+		"price": 3
+	},
+	{
+		"name":"Ovo",
+		"price": 0.8
+	},
+	{
+		"name":"Queijo",
+		"price": 1.5
+	}
+]
 ```
 
 <b>Descrição:</b> Atualizar o registro do ingrediente do código 6 (Passando o id)
