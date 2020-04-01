@@ -1,6 +1,6 @@
 # DOCUMENTAÇÃO
 
-<h2>Para Consultas</h2>
+<h2>Consultas</h2>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders  <b>method: GET</b>
 <br /> <b>Descrição:</b> Lista de todos os pedidos e somente o administrador tem acesso. 
@@ -12,6 +12,7 @@
 <br /> <b>Descrição:</b> Lista os pedidos do usuário autenticado. O administrador e o usuário comum têm acessos. 
 
 <hr />
+<h2>Cadastros</h2>
 <h3>Salvar pedidos</h3>
   
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders  <b>method: POST</b>
