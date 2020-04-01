@@ -9,7 +9,7 @@
 <br /> <b>Descrição:</b> O administrador pode acessar qualquer pedido por meio de seu código e o usuário comum só pode acessar os seus pedidos indivualmente. 
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/my
-<br /> <b>Descrição:</b> Lista de pedidos do usuário autenticado. O administrador e o usuário comum têm acessos. 
+<br /> <b>Descrição:</b> Lista os pedidos do usuário autenticado. O administrador e o usuário comum têm acessos. 
 
 ------------------------------------------------
 
