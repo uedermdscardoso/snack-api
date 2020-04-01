@@ -2,19 +2,19 @@
 
 <h2>Para Consultas</h2>
 
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders  method: GET
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders  <b>method: GET</b>
 <br /> <b>Descrição:</b> Lista de todos os pedidos e somente o administrador tem acesso. 
 
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>  method: GET
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>  <b>method: GET</b>
 <br /> <b>Descrição:</b> O administrador pode acessar qualquer pedido por meio de seu código e o usuário comum só pode acessar os seus pedidos individualmente. 
 
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/my  method: GET
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/my  <b>method: GET</b>
 <br /> <b>Descrição:</b> Lista os pedidos do usuário autenticado. O administrador e o usuário comum têm acessos. 
 
 <hr />
 <h3>Salvar pedidos<h3/>
   
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders  method: POST
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders  <b>method: POST</b>
 
 Descrição: JSON para criar um pedido com item personalizados e não personalizados conforme o atributo isCustom. Precisa seguir essa estrutura. 
 
@@ -63,7 +63,7 @@ Descrição: JSON para criar um pedido com item personalizados e não personaliz
 <hr />
 <h3>Salvar ingredientes<h3/>
   
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients   method: POST
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients   <b>method: POST</b>
 Descrição: Salvar novo ingrediente
 
 ```
