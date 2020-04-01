@@ -16,7 +16,7 @@
 <h3>Salvar pedidos</h3>
   
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders      <b>Method: POST</b>
-
+<br />
 <b>Descrição:</b> JSON para criar um pedido com item personalizados e não personalizados conforme o atributo isCustom. Precisa seguir essa estrutura. 
 
 ```
@@ -63,16 +63,19 @@
 
 <h3>Cancelar pedido</h3>
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>/cancel      <b>Method: PUT</b>
+<br />
 <b>Descrição: </b> Muda o status do pedido para cancelado (CANCELED). O administrador pode cancelar qualquer pedido em aberto (PREPARING) e o usuário comum apenas pode cancelar os seus pedidos. 
 
 <h3>Finalizar pedidos</h3>
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/orders/<b>{id}</b>/ready      <b>Method: PUT</b>
+<br />
 <b>Descrição: </b> Muda o status do pedido para pronto (READY). Somente o administrador pode finalizar os pedidos.
 
 <hr />
 <h3>Salvar ingredientes</h3>
   
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients      <b>Method: POST</b>
+<br />
 <b>Descrição:</b> Salvar novo ingrediente
 
 ```
