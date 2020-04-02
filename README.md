@@ -37,7 +37,7 @@
 <hr />
 <h2>Testes Unitários</h2>
 <p>Foram feitos testes unitários apenas para as listagens e executar 'JUnit Test' para executá-los. A classe responsável é <b>'SnackWebApplicationTests'<b/> que está no pacote 'test'. Atenta-se nos atributos estáticos CLIENT_id, CLIENT_SECRET, USERNAME E PASSWORD da classe citada. </p>
-<p><i>* Observação: Os cadastros devem ter sido feitos antes de executar os testes. Principalmente, o cadastrado de pessoas (com administrador) </i></p>
+<p><i>* Observação: Os cadastros devem ter sido feitos antes de executar os testes. Principalmente, o cadastro de pessoas (com administrador) </i></p>
 
 <hr />
 <h2>Autenticação</h2>
