@@ -16,6 +16,14 @@
 * Os exemplos de estruturas json e descrição das endpoints estão disponibilizadas abaixo. 
 
 <hr />
+<h2>Swagger</h2>
+
+<ul>
+	<li>http://<b>{server}</b>:<b>{port}</b>/swagger-ui.html</li>
+	<li>http://<b>{server}</b>:<b>{port}</b>/v2/api-docs</li>
+</ul>
+
+<hr />
 <h2>Autenticação</h2>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/oauth/token      <b>Method: POST</b>
