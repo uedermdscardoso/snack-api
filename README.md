@@ -16,6 +16,14 @@
 * Os exemplos de estruturas json e descrição das endpoints estão disponibilizadas abaixo. 
 
 <hr />
+<h2>Autenticação</h2>
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/oauth/token      <b>Method: POST</b>
+<br /> <b>Descrição:</b> Obter o token de acesso
+
+
+
+<hr />
 <h2>Consultas</h2>
 
 <h3>Pessoas</h3>
