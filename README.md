@@ -89,6 +89,148 @@
 <br /><b>Descrição:</b> Cadastra uma lista de lanches.
 <br /><b>Permissão: </b> Somente o administrador.
 
+Exemplo de estrutura: 
+```
+[
+	{
+		"id": 1,
+		"name": "X-Bacon",
+		"isCustom": false,
+		"items": [
+			{
+				"snack": { "id": 1 },
+				"ingredient": {
+					"id": 2,
+					"name": "Bacon",
+					"price": 2	
+				},
+				"piece": 1
+			},
+			{
+				"snack": { "id": 1 },
+				"ingredient": {
+					"id": 3,
+					"name": "Hambúrguer",
+					"price": 3
+				},
+				"piece": 1
+			},
+			{
+				"snack": { "id": 1 },
+				"ingredient": {
+					"id": 5,
+					"name": "Queijo",
+					"price": 1.50
+				},
+				"piece": 1
+			}
+		]
+	},
+	{
+		"id": 2,
+		"name": "X-Burger",
+		"isCustom": false,
+		"items": [
+			{
+				"snack":{ "id": 2 },
+				"ingredient":{
+					"id": 3,
+					"name": "Hambúrguer",
+					"price": 3	
+				},
+				"piece": 1
+			},
+			{
+				"snack":{ "id": 2 },
+				"ingredient":{
+					"id": 5,
+					"name": "Queijo",
+					"price": 1.50	
+				},
+				"piece": 1
+			}
+		]
+	},
+	{
+		"id": 3,
+		"name": "X-Egg",
+		"isCustom": false,
+		"items": [
+			{
+				"snack": { "id": 3 },
+				"ingredient": {
+					"id": 3,
+					"name": "Hambúrguer",
+					"price": 3	
+				},
+				"piece": 1
+			},
+			{
+				"snack": { "id": 3 },
+				"ingredient": {
+					"id": 4,
+					"name": "Ovo",
+					"price": 0.80	
+				},
+				"piece": 1
+			}, 
+			{
+				"snack": { "id": 3 },
+				"ingredient": {
+					"id": 5,
+					"name": "Queijo",
+					"price": 1.50	
+				},
+				"piece": 1
+			}
+		]
+	},
+	{
+		"id": 4,
+		"name": "X-Egg Bacon",
+		"isCustom": false,
+		"items": [
+			{
+				"snack": { "id": 4 },
+				"ingredient": {
+					"id": 2,
+					"name": "Bacon",
+					"price": 2
+				},
+				"piece": 1
+			}, 
+			{
+				"snack": { "id": 4 },
+				"ingredient": {
+					"id": 3,
+					"name": "Hambúrguer",
+					"price": 3	
+				},
+				"piece": 1
+			},
+			{
+				"snack": { "id": 4 },
+				"ingredient": {
+					"id": 4,
+					"name": "Ovo",
+					"price": 0.80
+				},
+				"piece": 1
+			}, 
+			{
+				"snack": { "id": 4 },
+				"ingredient": {
+					"id": 5,
+					"name": "Queijo",
+					"price": 1.50	
+				},
+				"piece": 1
+			}
+		]
+	}
+]
+```
+
 <h3>Atualiza lanche</h3>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/snacks/<b>{id}</b>      <b>Method: PUT</b>
