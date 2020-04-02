@@ -61,7 +61,7 @@
 	<li>Insira o token no campo disponível ao lado</li>
 	<li>Clique em 'Preview Request' (Será adicionado o valor 'Bearer '+ token no header)</li>
 	<li>Passar algum objeto no body se necessário</li>
-<ul>
+</ul>
 
 <hr />
 <h2>Consultas</h2>
