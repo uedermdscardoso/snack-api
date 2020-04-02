@@ -1,5 +1,21 @@
 # DOCUMENTAÇÃO
 
+<h2>Passos</h2>
+
+<ul>
+	<li>Cadastrar as pessoas (principalmente, o administrador com perfil de <b>admin</b>)</li>
+	<li>Autenticar com uma pessoa</li>
+	<li>Criar os ingredientes (só admin tem permissão)</li>
+	<li>Criar os lanches (só admin tem permissão)</li>
+	<li>Fazer um pedido com um usuário comum</li>
+	<li>Fazer listagens</li>
+</ul>
+
+<br />
+
+* Os exemplos de estruturas json e descrição das endpoints estão disponibilizadas abaixo. 
+
+<hr />
 <h2>Consultas</h2>
 
 <h3>Pessoas</h3>
