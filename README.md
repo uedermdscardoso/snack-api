@@ -142,7 +142,7 @@ Exemplo:
 	    "fullName": "Administrador",
 	    "username": "admin",
 	    "password": "123456",
-	    "profile": "CUSTOMER"		
+	    "profile": "ADMIN"		
 	},
 	{
 	    "fullName": "David Sales",
