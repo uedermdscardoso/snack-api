@@ -92,6 +92,12 @@ Exemplo:
 	}
 ```
 
+<h3>Exclui pessoa</h3>
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/person/<b>{id}</b>      <b>Method: DELETE</b>
+<br /><b>Descrição:</b> Excluir uma pessoa específica.
+<br /> <b>Permissão: </b> Administrador pode excluir qualquer pessoa e o usuário comum só pode excluir ele mesmo.
+
 <hr />
 <h3>Salvar ingredientes</h3>
   
