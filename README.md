@@ -78,7 +78,7 @@ Exemplo:
 
 <h3>Atualiza pessoa</h3>
 
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/person/{id}      <b>Method: PUT</b>
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/person/<b>{id}</b>      <b>Method: PUT</b>
 <br /><b>Descrição:</b> Atualiza os dados de uma pessoa específica.
 <br /> <b>Permissão: </b> Administrador pode atualizar dados de qualquer pessoa e o usuário comum só pode alterar os seus próprios dados.
 
