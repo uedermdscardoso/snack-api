@@ -93,12 +93,10 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 ```
 [
 	{
-		"id": 1,
 		"name": "X-Bacon",
 		"isCustom": false,
 		"items": [
 			{
-				"snack": { "id": 1 },
 				"ingredient": {
 					"id": 2,
 					"name": "Bacon",
@@ -107,7 +105,6 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 				"piece": 1
 			},
 			{
-				"snack": { "id": 1 },
 				"ingredient": {
 					"id": 3,
 					"name": "Hambúrguer",
@@ -116,7 +113,6 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 				"piece": 1
 			},
 			{
-				"snack": { "id": 1 },
 				"ingredient": {
 					"id": 5,
 					"name": "Queijo",
@@ -127,12 +123,10 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 		]
 	},
 	{
-		"id": 2,
 		"name": "X-Burger",
 		"isCustom": false,
 		"items": [
 			{
-				"snack":{ "id": 2 },
 				"ingredient":{
 					"id": 3,
 					"name": "Hambúrguer",
@@ -141,7 +135,6 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 				"piece": 1
 			},
 			{
-				"snack":{ "id": 2 },
 				"ingredient":{
 					"id": 5,
 					"name": "Queijo",
@@ -152,12 +145,10 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 		]
 	},
 	{
-		"id": 3,
 		"name": "X-Egg",
 		"isCustom": false,
 		"items": [
 			{
-				"snack": { "id": 3 },
 				"ingredient": {
 					"id": 3,
 					"name": "Hambúrguer",
@@ -166,7 +157,6 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 				"piece": 1
 			},
 			{
-				"snack": { "id": 3 },
 				"ingredient": {
 					"id": 4,
 					"name": "Ovo",
@@ -175,7 +165,6 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 				"piece": 1
 			}, 
 			{
-				"snack": { "id": 3 },
 				"ingredient": {
 					"id": 5,
 					"name": "Queijo",
@@ -186,12 +175,10 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 		]
 	},
 	{
-		"id": 4,
 		"name": "X-Egg Bacon",
 		"isCustom": false,
 		"items": [
 			{
-				"snack": { "id": 4 },
 				"ingredient": {
 					"id": 2,
 					"name": "Bacon",
@@ -200,7 +187,6 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 				"piece": 1
 			}, 
 			{
-				"snack": { "id": 4 },
 				"ingredient": {
 					"id": 3,
 					"name": "Hambúrguer",
@@ -209,7 +195,6 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 				"piece": 1
 			},
 			{
-				"snack": { "id": 4 },
 				"ingredient": {
 					"id": 4,
 					"name": "Ovo",
@@ -218,7 +203,6 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 				"piece": 1
 			}, 
 			{
-				"snack": { "id": 4 },
 				"ingredient": {
 					"id": 5,
 					"name": "Queijo",
