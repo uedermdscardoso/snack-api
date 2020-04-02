@@ -6,7 +6,12 @@
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients      <b>Method: GET</b>
 <br /> <b>Descrição:</b> Lista todos os ingredientes.
-<br /> <b>Permissão: </b> Somente o administrador
+<br /> <b>Permissão: </b> Somente o administrador.
+
+<h3>Lanches</h3>
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/snacks      <b>Method: GET</b>
+<br /> <b>Descrição:</b> Lista todos os lanches.
+<br /> <b>Permissão: </b> Somente o administrador.
 
 <h3>Pedidos</h3>
 
@@ -24,6 +29,7 @@
 
 <hr />
 <h2>Cadastros</h2>
+
 <h3>Salvar ingredientes</h3>
   
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients      <b>Method: POST</b>
@@ -74,7 +80,23 @@
 <br />
 <b>Descrição:</b> Exclui apenas um ingrediente. 
 <br /> <b>Permissão: </b> Somente o administrador.
-	
+		
+
+<hr />
+<h3>Salvar lanches</h3>
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/snacks      <b>Method: POST</b>
+<b>Descrição:</b> Cadastra uma lista de lanches.
+<br /> <b>Permissão: </b> Somente o administrador.
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/snacks/<b>{id}</b>      <b>Method: PUT</b>
+<b>Descrição:</b> Atualiza as dados de um determinado lanche.
+<br /> <b>Permissão: </b> Somente o administrador.
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/snacks/<b>{id}</b>      <b>Method: DELETE</b>
+<b>Descrição:</b> Exclui um determinado lanche por meio do código.
+<br /> <b>Permissão: </b> Somente o administrador.
+
 <hr />
 <h3>Salvar pedidos</h3>
   
