@@ -43,9 +43,11 @@
 <h3>Cadastrar Pessoas</h3>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/person      <b>Method: POST</b>
-<b>Descrição:</b> Cadastrar uma lista de pessoas.
+<br /><b>Descrição:</b> Cadastrar uma lista de pessoas.
 <br /> <b>Permissão: </b> Administrador e o usuário comum.
 
+
+<hr />
 <h3>Salvar ingredientes</h3>
   
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients      <b>Method: POST</b>
