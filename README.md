@@ -46,6 +46,23 @@
 <br /><b>Descrição:</b> Cadastrar uma lista de pessoas.
 <br /> <b>Permissão: </b> Administrador e o usuário comum.
 
+Exemplo: 
+```
+[
+	{
+	    "fullName": "João Vinicius",
+	    "username": "joao",
+	    "password": "joao",
+	    "profile": "CUSTOMER"
+		},
+		{
+	    "fullName": "Maria Alves",
+	    "username": "maria",
+	    "password": "maria",
+	    "profile": "CUSTOMER"
+	}	
+]
+```
 
 <hr />
 <h3>Salvar ingredientes</h3>
