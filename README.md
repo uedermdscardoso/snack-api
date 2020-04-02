@@ -68,6 +68,13 @@
   ]
 ```
 
+<h3>Excluir ingrediente</h3>
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients/<b>{id}</b>      <b>Method: DELETE</b>
+<br />
+<b>Descrição:</b> Exclui apenas um ingrediente. 
+<br /> <b>Permissão: </b> Somente o administrador.
+	
 <hr />
 <h3>Salvar pedidos</h3>
   
