@@ -29,6 +29,7 @@
 	client-id: startup
 	client-secret: 12345678
 ```
+
 <h4>2. Passo</h4>
 <p>Passar um formulário de três campos no body com o tipo x-www-form-urlencoded. Os campos e os valores estão apresentados abaixo: (São usuário e senha de uma determinada pessoa que foi cadastrada)</p>
 
@@ -37,6 +38,30 @@
 	campo: password, valor: 123456, 
 	campo: grant_type, valor: password
 ```
+
+<h4>3. Passo</h4>
+<p>O resultado bem sucedido será o retorno deste objeto: </p>
+
+* O importante é o valor de 'access_token' que você precisa copiá-lo.
+```
+{
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYWRtaW4iLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTg1ODUxMjUxLCJhdXRob3JpdGllcyI6WyJBRE1JTiJdLCJqdGkiOiI0ZmU0OTM2Ni01MmYwLTQ4YzItYmI5Yy0wMmM1MzljZGZiMjciLCJjbGllbnRfaWQiOiJzdGFydHVwIn0.un2YRHspbr1t0tBiNaWxbyEbGHMrX0ZHUOxEvp3rAn4",
+    "token_type": "bearer",
+    "expires_in": 43199,
+    "scope": "read write",
+    "jti": "4fe49366-52f0-48c2-bb9c-02c539cdfb27"
+}
+```
+
+<h4>4. Passo</h4>
+<ul>
+	<li>Escolha uma requisição que deseja fazer</li>
+	<li>Escolha a opção 'Bearer Token' na aba 'Authorization'</li>
+	<li>Copia e cola o valor apresentado no atributo 'access_token'</li>
+	<li>Insira o token no campo disponível ao lado</li>
+	<li>Clique em 'Preview Request' (Será adicionado o valor 'Bearer '+ token no header)</li>
+	<li>Passar algum objeto no body se necessário</li>
+<ul>
 
 <hr />
 <h2>Consultas</h2>
