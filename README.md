@@ -24,6 +24,10 @@
 </ul>
 
 <hr />
+<h2>Testes Unitários</h2>
+<p>Foram feitos testes unitários apenas para as listagens e executar 'JUnit Test' para executá-los. O arquivo principal é <b>'SnackWebApplicationTests'<b/> que está no pacote 'test'</p>
+
+<hr />
 <h2>Autenticação</h2>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/oauth/token      <b>Method: POST</b>
