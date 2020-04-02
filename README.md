@@ -21,7 +21,22 @@
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/oauth/token      <b>Method: POST</b>
 <br /> <b>Descrição:</b> Obter o token de acesso
 
+<h3>Pelo Postman</h3>
+<h4>1. Passo</h4>
+<p>Precisa escolher a opção 'Basic Auth' da aba 'Authorization' e informar o client-id e o client-secret definidos no application.properties e depois clicar no botão 'Preview Request'. Depois disso, será adicionada uma key 'Authorization' no header com o valor 'Basic ...' </p>
 
+```
+	client-id: startup
+	client-secret: 12345678
+```
+<h4>2. Passo</h4>
+<p>Passar um formulário de três campos no body com o tipo x-www-form-urlencoded. Os campos e os valores estão apresentados abaixo: (São usuário e senha de uma determinada pessoa que foi cadastrada)</p>
+
+```
+	campo: username, valor: admin, 
+	campo: password, valor: 123456, 
+	campo: grant_type, valor: password
+```
 
 <hr />
 <h2>Consultas</h2>
