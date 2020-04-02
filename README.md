@@ -89,7 +89,7 @@
 <br /><b>Descrição:</b> Cadastra uma lista de lanches.
 <br /><b>Permissão: </b> Somente o administrador.
 
-Exemplo de estrutura: 
+Exemplo de estrutura (* Todos os atributos são obrigatórios): 
 ```
 [
 	{
