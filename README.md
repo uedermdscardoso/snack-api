@@ -2,6 +2,16 @@
 
 <h2>Consultas</h2>
 
+<h3>Pessoas</h3>
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/person      <b>Method: GET</b>
+<br /> <b>Descrição:</b> Lista todas as pessoas.
+<br /> <b>Permissão: </b> Somente o administrador.
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/person/<b>{id}</b>      <b>Method: GET</b>
+<br /> <b>Descrição:</b> Lista uma pessoa específica.
+<br /> <b>Permissão: </b> O administrador pode listar qualquer pessoa e o usuário comum apenas pode ver os seus própros dados.
+
 <h3>Ingredientes</h3>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients      <b>Method: GET</b>
@@ -29,6 +39,12 @@
 
 <hr />
 <h2>Cadastros</h2>
+
+<h3>Cadastrar Pessoas</h3>
+
+<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/person      <b>Method: POST</b>
+<b>Descrição:</b> Cadastrar uma lista de pessoas.
+<br /> <b>Permissão: </b> Administrador e o usuário comum.
 
 <h3>Salvar ingredientes</h3>
   
