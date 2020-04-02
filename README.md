@@ -86,19 +86,19 @@
 <h3>Salvar lanches</h3>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/snacks      <b>Method: POST</b>
-<b>Descrição:</b> Cadastra uma lista de lanches.
-<br /> <b>Permissão: </b> Somente o administrador.
+<br /><b>Descrição:</b> Cadastra uma lista de lanches.
+<br /><b>Permissão: </b> Somente o administrador.
 
 <h3>Atualiza lanche</h3>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/snacks/<b>{id}</b>      <b>Method: PUT</b>
-<b>Descrição:</b> Atualiza as dados de um determinado lanche.
+<br /><b>Descrição:</b> Atualiza as dados de um determinado lanche.
 <br /> <b>Permissão: </b> Somente o administrador.
 
 <h3>Exclui lanche</h3>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/snacks/<b>{id}</b>      <b>Method: DELETE</b>
-<b>Descrição:</b> Exclui um determinado lanche por meio do código.
+<br /><b>Descrição:</b> Exclui um determinado lanche por meio do código.
 <br /> <b>Permissão: </b> Somente o administrador.
 
 <hr />
