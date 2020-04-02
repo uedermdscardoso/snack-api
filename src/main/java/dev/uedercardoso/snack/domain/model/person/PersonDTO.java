@@ -15,6 +15,10 @@ public class PersonDTO implements Serializable {
 	private String username;
 	private PersonProfile profile;
 	
+	public PersonDTO() {
+		
+	}
+	
 	public PersonDTO(Person person) {
 		this.id = person.getId();
 		this.fullName = person.getFullName();

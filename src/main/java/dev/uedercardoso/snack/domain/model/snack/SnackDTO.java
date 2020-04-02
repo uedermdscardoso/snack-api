@@ -16,9 +16,6 @@ public class SnackDTO implements Serializable {
 	private Long id; 
 	private String name;
 	
-	@JsonIgnore
-	private Boolean isCustom;
-	
 	private Double price;
 	private List<SnackIngredientDTO> ingredients;
 	
@@ -29,7 +26,6 @@ public class SnackDTO implements Serializable {
 	public SnackDTO(Snack snack, List<SnackIngredientDTO> ingredientsDTO) {
 		this.id = snack.getId();
 		this.name = snack.getName() != null ? snack.getName() : "";
-		this.isCustom = snack.isCustom();
 		this.price = snack.getPrice();
 		
 		this.ingredients = ingredientsDTO;

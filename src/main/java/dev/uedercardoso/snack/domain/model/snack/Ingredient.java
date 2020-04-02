@@ -39,5 +39,10 @@ public class Ingredient implements Serializable {
 	public Ingredient() {
 		
 	}
+
+	public Ingredient(String name, Double price) {
+		this.name = name;
+		this.price = price;
+	}
 	
 }

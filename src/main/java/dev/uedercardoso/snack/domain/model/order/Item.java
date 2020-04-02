@@ -29,13 +29,11 @@ public class Item implements Serializable {
 	@JoinColumn(name="order_id",insertable=false, updatable=false)
 	private Orders order;
 	
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE}, fetch=FetchType.LAZY)
+	@ManyToOne(cascade={CascadeType.PERSIST,CascadeType.REFRESH,CascadeType.DETACH}, fetch=FetchType.LAZY)
 	@JoinColumn(name="snack_id",insertable=false, updatable=false)
 	private Snack snack;
 	
 	private Long quantity;
-	
-	private String description;
 	
 	@Column(name="is_custom",nullable=false)
 	private Boolean isCustom;
@@ -49,20 +47,14 @@ public class Item implements Serializable {
 		
 	}
 
-	public Item(ItemPk id, Item item) {
+	public Item(ItemPk id, Snack snack, Item item) {
 		this.id = id;
+		this.order = item.getOrder();
+		this.snack = snack;
 		this.quantity = item.getQuantity();
 		this.isCustom = item.isCustom(); 
 		this.price = item.getPrice();
 		this.discount = item.getDiscount(); 
-	}
-	
-	public Item(Item item, Orders order) {
-		this.order = order; 
-		this.snack = item.getSnack(); 
-		this.isCustom = item.isCustom(); 
-		this.price = item.getPrice();
-		this.discount =item.getDiscount(); 
 	}
 	
 	public Boolean isCustom() {

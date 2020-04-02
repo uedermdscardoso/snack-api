@@ -16,6 +16,7 @@ import dev.uedercardoso.snack.domain.model.order.OrdersDTO;
 import dev.uedercardoso.snack.domain.model.order.TypeStatus;
 import dev.uedercardoso.snack.domain.model.person.Person;
 import dev.uedercardoso.snack.domain.model.person.PersonDTO;
+import dev.uedercardoso.snack.domain.model.person.PersonProfile;
 import dev.uedercardoso.snack.domain.model.snack.Ingredient;
 import dev.uedercardoso.snack.domain.model.snack.Snack;
 import dev.uedercardoso.snack.domain.model.snack.SnackDTO;
@@ -27,12 +28,16 @@ import dev.uedercardoso.snack.domain.repositories.OrdersRepository;
 import dev.uedercardoso.snack.domain.repositories.PersonRepository;
 import dev.uedercardoso.snack.domain.repositories.SnackIngredientRepository;
 import dev.uedercardoso.snack.domain.repositories.SnackRepository;
+import dev.uedercardoso.snack.exceptions.AccessNotAllowedException;
+import dev.uedercardoso.snack.exceptions.CurrentUserNotFoundException;
 import dev.uedercardoso.snack.exceptions.EmptyListException;
 import dev.uedercardoso.snack.exceptions.EmptyNameException;
 import dev.uedercardoso.snack.exceptions.OrderCanceledException;
 import dev.uedercardoso.snack.exceptions.OrderIsReadyException;
 import dev.uedercardoso.snack.exceptions.OrderNotFoundException;
 import dev.uedercardoso.snack.exceptions.OrdersServiceException;
+import dev.uedercardoso.snack.exceptions.PersonNotFoundException;
+import dev.uedercardoso.snack.exceptions.SnackNotFoundException;
 
 @Service
 public class OrdersService {
@@ -54,71 +59,94 @@ public class OrdersService {
 
 	public void save(Orders order) throws OrdersServiceException {
 		
-		int count = 0; 
+		int count1 = -1, count2 = -1;
+		List<Long> customSnackIds = new LinkedList<Long>();
+		List<Long> snackIds = new LinkedList<Long>();
 		
 		for(Item item : order.getItems()) {
-
-			count++;
 			
 			if(order.getItems() == null || order.getItems().size() == 0)
 				throw new EmptyListException("Items não foram preenchidos");
-			
+
 			if(item.getIsCustom()) {
 				
 				if(item.getSnack().getName() != null && !item.getSnack().getName().isEmpty())
 					throw new EmptyNameException("O nome não pode ser preenchido para lanches personalizados.");
 
-				Snack snackCustom = item.getSnack();
-				snackCustom.setIsCustom(item.getIsCustom());
-				snackCustom.setPrice(this.calcSnackPrice(snackCustom));
+				Snack snackCustom = new Snack(item.getIsCustom(), this.calcCustomSnackPrice(item.getSnack().getItems()));
 				snackCustom = this.snackRepository.saveAndFlush(snackCustom);
-				item.setSnack(snackCustom);
-
+				
 				for(SnackIngredient item2 : item.getSnack().getItems()) {
+					
 					Ingredient ingredient = item2.getIngredient();
-					SnackIngredientPk pk = new SnackIngredientPk(item.getSnack().getId(), ingredient.getId());
+					SnackIngredientPk pk = new SnackIngredientPk(snackCustom.getId(), ingredient.getId());
 					Long piece = item2.getPiece() != null && item2.getPiece() > 0 ? item2.getPiece() : 1l;
-					item2 = this.snackIngredientRepository.saveAndFlush(new SnackIngredient(pk, piece));
+					this.snackIngredientRepository.saveAndFlush(new SnackIngredient(pk, snackCustom, ingredient, piece));	
+				
 				}
 				
+				customSnackIds.add(snackCustom.getId());
+				
+				item.setPrice(this.calcCustomSnackPrice(item.getSnack().getItems()));
+				
 			} else {
+				if(!this.snackRepository.existsByIdAndIsCustom(item.getSnack().getId(), false))
+					throw new SnackNotFoundException("O lanche "+item.getSnack().getId()+" não foi encontrado");
+				
 				Optional<Snack> opSnack = this.snackRepository.findById(item.getSnack().getId());
 				if(opSnack.isPresent())
 					item.setSnack(opSnack.get());
 				
-				Long quantity = (long) order.getItems().size();
-				item.setQuantity(quantity);		
+				if(item.getQuantity() == null)
+					item.setQuantity(1l);
+				
+				item.setPrice(this.calcSnackPrice(item));
+				
+				snackIds.add(item.getSnack().getId());
 			}
-
 			
-			item.setPrice(this.calcSnackPrice(item.getSnack()));
 			item.setDiscount(this.calcDiscount(item.getSnack()));
-			
-			Optional<Person> opPerson = this.personRepository.findById(order.getPerson().getId());
-			if(!opPerson.isPresent())
-				throw new OrdersServiceException("Pessoa com o id "+order.getPerson().getId());
-			
-			
-			Double totalPrice = this.calcTotalPrice(order.getItems()); 
-			Double totalDiscount = this.calcDiscountPrice(order.getItems());
-			
-			order = new Orders(order, totalPrice, totalDiscount, opPerson.get());
-			
-			if(count == order.getItems().size())
-				order = this.ordersRepository.saveAndFlush(order);
-			
-			if(order.getId() != null || order.getId() > 0) {
-				ItemPk pk = new ItemPk(order.getId(),item.getSnack().getId());
-				this.itemRepository.saveAndFlush(new Item(pk, item));
-			}				
 			
 		}
 		
+		
+		Optional<Person> opPerson = this.personRepository.findById(order.getPerson().getId());
+		if(!opPerson.isPresent())
+			throw new OrdersServiceException("Pessoa com o id "+order.getPerson().getId());
+		
+		Double totalPrice = this.calcTotalPrice(order.getItems()); 
+		Double totalDiscount = this.calcDiscountPrice(order.getItems());
+		
+		Orders newOrder = new Orders(order, totalPrice, totalDiscount, opPerson.get());
+		newOrder = this.ordersRepository.saveAndFlush(newOrder);
+		
+		if(newOrder.getId() != null || newOrder.getId() > 0) {
+			
+			newOrder.setItems(order.getItems());
+			
+			for(Item item : newOrder.getItems()) {
+				if(item.getIsCustom()) {
+					this.saveItems(newOrder, item, customSnackIds, ++count1);
+				} else {
+					this.saveItems(newOrder, item, snackIds, ++count2);
+				}
+			}
+		}
 	}
 	
-	public OrdersDTO getOrdersById(Long id){
+	public OrdersDTO getOrdersById(Long id, String currentUsername){
+		
+		if(!this.personRepository.existsByUsername(currentUsername))
+			throw new CurrentUserNotFoundException("O usuário atual "+currentUsername+" não foi encontrado");
+		
+		if(!this.ordersRepository.existsById(id))
+			throw new OrderNotFoundException("O pedido "+id+" não foi encontrado");
+		
+		if(!this.personRepository.existsByUsernameAndProfile(currentUsername, PersonProfile.ADMIN) && !this.ordersRepository.existsByIdAndPersonUsername(id,currentUsername))
+			throw new AccessNotAllowedException("O usuário "+currentUsername+" não pode acessar o pedido "+id+" porque este pedido não foi feito por ele");
 		
 		Orders order = this.ordersRepository.findById(id).get();
+		
 		List<Orders> orders = new LinkedList<Orders>(); 
 		orders.add(order);
 		
@@ -127,8 +155,11 @@ public class OrdersService {
 		return ordersDTO.get(0);
 	}
 	
-	public List<OrdersDTO> getOrdersByPersonId(Long id){
-		Person person = this.personRepository.findById(id).get();
+	public List<OrdersDTO> getMyOrders(String username){
+		if(!this.personRepository.existsByUsername(username))
+			throw new PersonNotFoundException("Pessoa "+username+" não foi encontrado");
+		
+		Person person = this.personRepository.findByUsername(username);
 		
 		List<Orders> orders = this.ordersRepository.findByPerson(person);
 		List<OrdersDTO> ordersDTO = this.convertOrdersToOrdersDTO(orders);
@@ -145,6 +176,25 @@ public class OrdersService {
 			throw new EmptyListException("Lista vazia");
 		}
 		return ordersDTO;
+	}
+
+	
+	private void saveItems(Orders newOrder, Item item, List<Long> snackIds, int count) {
+		Snack snack = null;
+		ItemPk itemPk = null;
+		
+		Long id = snackIds.get(count);
+		
+		snack = this.snackRepository.findById(id).get();
+		itemPk = new ItemPk(newOrder.getId(), id);
+		
+		Item i = new Item(itemPk, snack, item);
+		i.setOrder(newOrder);
+		i.getOrder().setItems(null);
+		i.getSnack().setItems(null);
+		
+		this.itemRepository.saveAndFlush(i);	
+	
 	}
 	
 	private List<OrdersDTO> convertOrdersToOrdersDTO(List<Orders> orders) {
@@ -164,9 +214,16 @@ public class OrdersService {
 		return ordersDTO;
 	}
 	
-	public void cancelOrder(Long id) {
+	public void cancelOrder(Long id, String currentUsername) {
+		
+		if(!this.personRepository.existsByUsername(currentUsername))
+			throw new CurrentUserNotFoundException("O usuário atual "+currentUsername+" não foi encontrado");
+		
 		if(!this.ordersRepository.existsById(id))
 			throw new OrderNotFoundException("Pedido "+id+" não encontrado");
+		
+		if(!this.personRepository.existsByUsernameAndProfile(currentUsername, PersonProfile.ADMIN) && !this.ordersRepository.existsByIdAndPersonUsername(id,currentUsername))
+			throw new AccessNotAllowedException("O usuário "+currentUsername+" não pode cancelar o pedido "+id+" porque este pedido não foi feito por ele");
 		
 		if(this.ordersRepository.existsByIdAndStatus(id, TypeStatus.READY))
 			throw new OrderIsReadyException("O pedido "+id+" não pode ser cancelado porque já está pronto");
@@ -209,18 +266,19 @@ public class OrdersService {
 		//10 % de desconto
 		if(hasLettuce && !hasBacon) {
 			return (snack.getPrice() * 10) / 100;
-		} else {
+		} else { // Outros descontos
 			
 			Double value = 0d;
 			
 			for(SnackIngredient item : snack.getItems()) {
 				Ingredient ingredient = item.getIngredient();
-				if(ingredient.getName().equals("Hambúrguer")) {
+				
+				if(ingredient.getName().equals("Hambúrguer")) { //Desconto para muita carne 
 					value = (double) ((item.getPiece() % 3) == 0 ? (item.getPiece() / 3) : item.getPiece());
-					discount = item.getPiece() != null && item.getPiece() > 1 ? ingredient.getPrice() * value : 1d; 
-				} else if(ingredient.getName().equals("Queijo")) {
+					discount = item.getPiece() != null && item.getPiece() > 1 ? ingredient.getPrice() * value : 0d; 
+				} else if(ingredient.getName().equals("Queijo")) { //Desconto para muito queijo
 					value = (double) ((item.getPiece() % 3) == 0 ? (item.getPiece() / 3) : item.getPiece());
-					discount = item.getPiece() != null && item.getPiece() > 1 ? ingredient.getPrice() * value : 1d; 				
+					discount = item.getPiece() != null && item.getPiece() > 1 ? ingredient.getPrice() * value : 0d; 				
 				}
 			}
 			
@@ -238,18 +296,29 @@ public class OrdersService {
 	
 	private Double calcDiscountPrice(List<Item> items) {
 		Double discount = 0d;
+		
+		if(items == null || items.size() == 0)
+			throw new EmptyListException("Lista vazia");
+		
 		for(Item item : items) {
 			discount += item.getDiscount();
 		}
 		return discount; 
 	}
 	
-	private Double calcSnackPrice(Snack snack) {
+	private Double calcCustomSnackPrice(List<SnackIngredient> items) {
 		Double price = 0d;
-		for(SnackIngredient item : snack.getItems()) {
+		if(items == null || items.size() == 0)
+			throw new EmptyListException("Lista vazia");
+		
+		for(SnackIngredient item : items) {
 			price += item.getPiece() * item.getIngredient().getPrice();
 		}
 		return price;
+	}
+	
+	private Double calcSnackPrice(Item item) {
+		return item.getQuantity() * item.getSnack().getPrice();
 	}
 	
 	public void checkItems(Orders order) throws Exception {
@@ -261,9 +330,11 @@ public class OrdersService {
 				Assert.notNull(item.getSnack().getId(), "Informe o código do lanche");
 			else if(item.isCustom()) {
 				Assert.notNull(item.getQuantity(), "Informe a quantidade do item");
+				Assert.isNull(item.getSnack().getId(), "O lanche personalizado não pode conter código.");
 				Assert.notNull(item.getSnack().getItems(), "Informe os ingredientes do lanche personalizado");
 				
 				for(SnackIngredient item2 : item.getSnack().getItems()) {
+					Assert.notNull(item2.getIngredient(), "Informe o ingrediente");
 					Assert.notNull(item2.getIngredient().getId(), "Informe o código do ingrediente");
 					Assert.notNull(item2.getIngredient().getName(), "Informe o nome do ingrediente");
 					Assert.notNull(item2.getIngredient().getPrice(), "Informe o preço do ingrediente");

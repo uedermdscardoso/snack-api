@@ -41,8 +41,10 @@ public class SnackIngredient implements Serializable {
 		
 	}
 	
-	public SnackIngredient(SnackIngredientPk id, Long piece) {
+	public SnackIngredient(SnackIngredientPk id, Snack snack, Ingredient ingredient, Long piece) {
 		this.id = id;
+		this.snack = snack;
+		this.ingredient = ingredient;
 		this.piece = piece;
 	}
 	

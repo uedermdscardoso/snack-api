@@ -12,13 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import dev.uedercardoso.snack.domain.model.order.Orders;
 import lombok.Getter;
@@ -54,5 +48,14 @@ public class Person implements Serializable {
 	public Person() {
 		
 	}
+
+	public Person(Long id, Person person, String password) {
+		this.id = id;
+		this.fullName = person.getFullName();
+		this.username = person.getUsername();
+		this.password = password;
+		this.profile = person.getProfile();
+	}
+	
 	
 }

@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 
 import dev.uedercardoso.snack.domain.model.snack.Ingredient;
 import dev.uedercardoso.snack.domain.repositories.IngredientRepository;
+import dev.uedercardoso.snack.domain.repositories.SnackIngredientRepository;
 import dev.uedercardoso.snack.domain.repositories.SnackRepository;
+import dev.uedercardoso.snack.exceptions.EmptyListException;
 import dev.uedercardoso.snack.exceptions.IngredientNotFoundException;
+import dev.uedercardoso.snack.exceptions.IngredientWasFoundException;
 import dev.uedercardoso.snack.exceptions.OrdersServiceException;
 
 @Service
@@ -16,20 +19,29 @@ public class IngredientService {
 
 	@Autowired
 	private IngredientRepository ingredientRepository;
+	
+	@Autowired
+	private SnackIngredientRepository snackIngredientRepository;
 
 	@Autowired
-	private SnackRepository SnackRepository;
+	private SnackRepository snackRepository;
 	
 	public void save(List<Ingredient> ingredients) {
+		
+		for(Ingredient ingredient : ingredients) {
+			if(this.ingredientRepository.existsByName(ingredient.getName().trim())) 
+				throw new IngredientWasFoundException("O ingredient "+ingredient.getName().trim()+" já existe.");
+		}
+		
 		this.ingredientRepository.saveAll(ingredients);
 	}
 	
-	public void save(Long id, Ingredient ingredient) {
-		this.ingredientRepository.saveAndFlush(ingredient);
-	}
-	
 	public List<Ingredient> getAllIngredients(){
-		return this.ingredientRepository.findAll();
+		List<Ingredient> ingredients = this.ingredientRepository.findAll();
+		if(ingredients == null || ingredients.size() == 0)
+			throw new EmptyListException("Lista vazia");
+		
+		return ingredients;
 	}
 	
 	public void delete(Long id) throws OrdersServiceException {
@@ -39,7 +51,7 @@ public class IngredientService {
 		
 		Ingredient ingredient = this.ingredientRepository.findById(id).get();
 		
-		if(this.SnackRepository.existsBySnackByIngredient(ingredient))
+		if(this.snackIngredientRepository.existsByIngredient(ingredient))
 			throw new OrdersServiceException("O ingredient "+id+" não pode ser excluido porque existem lanches que são compostos pelo "+ingredient.getName()); 
 			
 		this.ingredientRepository.deleteById(id);

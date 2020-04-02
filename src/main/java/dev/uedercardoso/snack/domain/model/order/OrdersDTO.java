@@ -14,6 +14,7 @@ public class OrdersDTO implements Serializable {
 
 	private Long orderId; 
 	private Long creationDate;
+	private TypeStatus status;
 	private Double totalPrice;
 	private Double totalDiscount;
 	private List<ItemDTO> items;
@@ -26,6 +27,7 @@ public class OrdersDTO implements Serializable {
 	public OrdersDTO(Orders order, PersonDTO personDTO, List<ItemDTO> itemsDTO) {
 		this.orderId = order.getId(); 
 		this.creationDate = order.getCreationDate().getTime();
+		this.status = order.getStatus();
 		this.totalPrice = order.getTotalPrice();
 		this.totalDiscount = order.getTotalDiscount();
 		

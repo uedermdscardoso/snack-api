@@ -43,6 +43,12 @@ public class Snack implements Serializable {
 		
 	}
 	
+	public Snack(String name, Boolean isCustom, Double price) {
+		this.name = name;
+		this.isCustom = isCustom;
+		this.price = price;
+	}
+	
 	public Snack(Boolean isCustom, Double price) {
 		this.isCustom = isCustom;
 		this.price = price;

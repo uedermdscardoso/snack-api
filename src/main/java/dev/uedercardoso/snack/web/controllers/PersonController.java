@@ -2,9 +2,11 @@ package dev.uedercardoso.snack.web.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,10 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.uedercardoso.snack.domain.model.person.Person;
 import dev.uedercardoso.snack.domain.model.person.PersonDTO;
 import dev.uedercardoso.snack.domain.services.PersonService;
+import dev.uedercardoso.snack.exceptions.AccessNotAllowedException;
+import dev.uedercardoso.snack.exceptions.CurrentUserNotFoundException;
 import dev.uedercardoso.snack.exceptions.PersonNotFoundException;
+import dev.uedercardoso.snack.exceptions.UsernameWasFoundException;
 
 @RestController
-@RequestMapping("/persons")
+@RequestMapping("/person")
 public class PersonController {
 
 	@Autowired
@@ -33,9 +38,9 @@ public class PersonController {
 	public ResponseEntity<List<PersonDTO>> findAll(){
 		try {
 			
-			List<PersonDTO> persons = this.personService.getAllPersons();
+			List<PersonDTO> personsDTO = this.personService.getAllPersons();
 			
-			return ResponseEntity.ok(persons);
+			return ResponseEntity.ok(personsDTO);
 			
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().build();
@@ -44,13 +49,19 @@ public class PersonController {
 	
 	@GetMapping("/{id}")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CUSTOMER')")
-	public ResponseEntity<PersonDTO> findById(@PathVariable Long id){
+	public ResponseEntity<PersonDTO> findById(HttpServletRequest request, @PathVariable Long id){
 		try {
 			
-			PersonDTO person = this.personService.getPersonById(id);
+			String currentUsername = request.getUserPrincipal().getName();
 			
-			return ResponseEntity.ok(person);
+			PersonDTO personDTO = this.personService.getPersonById(id, currentUsername);
 			
+			return ResponseEntity.ok(personDTO);
+			
+		} catch(AccessNotAllowedException e) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		} catch(CurrentUserNotFoundException | PersonNotFoundException e) {
+			return ResponseEntity.notFound().build();
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().build();
 		}
@@ -65,6 +76,8 @@ public class PersonController {
 			
 			return ResponseEntity.ok().build();
 			
+		} catch(UsernameWasFoundException  e) {
+			return ResponseEntity.status(HttpStatus.FOUND).build();
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().build();
 		}
@@ -72,13 +85,21 @@ public class PersonController {
 	
 	@PutMapping("/{id}")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CUSTOMER')")
-	public ResponseEntity<Void> saveById(@PathVariable Long id, @Valid @RequestBody Person person){
+	public ResponseEntity<Void> saveById(HttpServletRequest request, @PathVariable Long id, @Valid @RequestBody Person person){
 		try {
 			
-			this.personService.save(id,person);
+			String currentUsername = request.getUserPrincipal().getName();
+			
+			this.personService.save(id,person, currentUsername);
 			
 			return ResponseEntity.ok().build();
 			
+		} catch(AccessNotAllowedException e) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		} catch(CurrentUserNotFoundException e) {
+			return ResponseEntity.notFound().build();
+		} catch(UsernameWasFoundException e) {
+			return ResponseEntity.status(HttpStatus.FOUND).build();
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().build();
 		}
@@ -86,14 +107,18 @@ public class PersonController {
 	
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('CUSTOMER')")
-	public ResponseEntity<Void> delete(@PathVariable Long id){
+	public ResponseEntity<Void> delete(HttpServletRequest request, @PathVariable Long id){
 		try {
 			
-			this.personService.delete(id);
+			String currentUsername = request.getUserPrincipal().getName();
+			
+			this.personService.delete(id, currentUsername);
 			
 			return ResponseEntity.ok().build();
 			
-		} catch(PersonNotFoundException e) {
+		} catch(AccessNotAllowedException e) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		} catch(CurrentUserNotFoundException | PersonNotFoundException e) {
 			return ResponseEntity.notFound().build();
 		} catch(Exception e) {
 			return ResponseEntity.badRequest().build();

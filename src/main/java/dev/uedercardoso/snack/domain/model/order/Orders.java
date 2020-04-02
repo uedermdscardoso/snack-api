@@ -51,7 +51,6 @@ public class Orders implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TypeStatus status;
 	
-	@NotNull
 	@OneToMany(mappedBy="order", cascade=CascadeType.ALL)
 	private List<Item> items;
 	
@@ -70,8 +69,6 @@ public class Orders implements Serializable {
 		this.totalPrice = totalPrice;
 		this.totalDiscount = totalDiscount;
 		this.person = person;
-		
-		this.items = order.getItems();
 	}
 	
 	public Orders(Orders order, TypeStatus status) {
