@@ -400,7 +400,7 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
         "snack": { 
           "id": 3
         }
-      }
+      },
       {
         "isCustom": true,
         "quantity": 1,
