@@ -231,12 +231,6 @@ Exemplo de estrutura (* Todos os atributos são obrigatórios):
 ]
 ```
 
-<h3>Atualiza lanche</h3>
-
-<b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/snacks/<b>{id}</b>      <b>Method: PUT</b>
-<br /><b>Descrição:</b> Atualiza as dados de um determinado lanche.
-<br /> <b>Permissão: </b> Somente o administrador.
-
 <h3>Exclui lanche</h3>
 
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/snacks/<b>{id}</b>      <b>Method: DELETE</b>
