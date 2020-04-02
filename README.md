@@ -29,7 +29,7 @@
 <b>URL: </b> http://<b>{server}</b>:<b>{port}</b>/ingredients      <b>Method: POST</b>
 <br />
 <b>Descrição:</b> Salvar novo ingrediente
-<br /> <b>Permissão: </b> Somente o administrador pode cadastrar ingredientes.
+<br /> <b>Permissão: </b> Somente o administrador.
 
 ```
 [
