@@ -47,6 +47,13 @@ public class SnackWebApplicationTests {
 	private OrdersRepository orderRepository;
 
 	private static final String DEFAULT_URL = "http://localhost";
+	
+	private static final String CLIENT_ID = "startup";
+	private static final String CLIENT_SECRET = "12345678";
+	
+	private static final String USERNAME = "admin"; //Usuário cadastrado no banco
+	private static final String PASSWORD = "123456"; //Senha cadastrada no banco
+	
 	private RestTemplate restTemplate;
 	
 	//Exemplos de testes unitáriso para listas
@@ -166,17 +173,16 @@ public class SnackWebApplicationTests {
     
 	
 	private HttpEntity<MultiValueMap<String, String>> auth() throws URISyntaxException {
-		String username = "admin", password = "123456";
-        
-        String token = this.authenticate("startup", "12345678", username, password);
+		
+        String token = this.authenticate(CLIENT_ID, CLIENT_SECRET, USERNAME, PASSWORD);
         
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Authorization", "Bearer "+token);
         
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("username",username);
-        map.add("password",password);
+        map.add("username",USERNAME);
+        map.add("password",PASSWORD);
         map.add("grant_type","password");
         
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
