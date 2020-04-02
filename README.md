@@ -50,12 +50,24 @@ Exemplo:
 ```
 [
 	{
+	    "fullName": "Administrador",
+	    "username": "admin",
+	    "password": "123456",
+	    "profile": "CUSTOMER"		
+	},
+	{
+	    "fullName": "David Sales",
+	    "username": "david",
+	    "password": "david",
+	    "profile": "CUSTOMER"		
+	},
+	{
 	    "fullName": "João Vinicius",
 	    "username": "joao",
 	    "password": "joao",
 	    "profile": "CUSTOMER"
-		},
-		{
+	},
+	{
 	    "fullName": "Maria Alves",
 	    "username": "maria",
 	    "password": "maria",
